@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<meta charset="UTF-8"/> 
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	</head>	
+	
+	<body>
+		<div class="container">
+			<div class="card text-white bg-success mb-3" th:each="agendamento : ${agendamentos}">
+				<div class="card-header"></div>
+				<div class="card-body">	
+					<div  th:text="${agendamento.contaOrigem}">Conta de origem</div>
+					<div  th:text="${agendamento.contaDestino}">Conta de destino</div>
+					<div>Valor da transferência Taxa <span>200,99</span></div>
+					<div  th:text="${agendamento.dataTransferencia}">Data da transferência</div>
+					<div  th:text="${agendamento.dataAgendamento}">Data de agendamento</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	
+</html>
+
+

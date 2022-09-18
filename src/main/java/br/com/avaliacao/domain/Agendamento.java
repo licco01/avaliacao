@@ -1,11 +1,16 @@
 package br.com.avaliacao.domain;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -17,25 +22,38 @@ import org.springframework.format.annotation.NumberFormat.Style;
 @Table(name = "AGENDAMENTOS")
 public class Agendamento extends AbstractEntity<Long> {
 	
-	
-	@Column(nullable = false, unique = true, length = 6)
+	@NotBlank
+	@Size(min = 6, max = 6, message = "Conta origem deve ter {max} caracteres")
+	@Column(nullable = false, unique = true)
 	private String contaOrigem;
-	
-	@Column(nullable = false, unique = true, length = 6)
+
+	@NotBlank
+	@Size(min = 6, max = 6, message = "Conta destino deve ter {max} caracteres")
+	@Column(nullable = false, unique = true)
 	private String contaDestino;
 	
+	@NotNull
 	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
 	@Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	private BigDecimal valorTransferencia;
+	private Double valorTransferencia;
 	
+	@NotNull
+	@FutureOrPresent(message = "{FutureOrPresent.agendamento.dataTransferencia}")
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_transferencia", nullable = false, columnDefinition = "DATE")
 	private LocalDate dataTransferencia;
 	
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_agendamento", columnDefinition = "DATE")
-	private LocalDate dataAgendamento;
-
+	private LocalDate dataAgendamento = LocalDate.now();
+	
+	@NotNull
+	@Column(nullable = false, length = 1)
+	@Enumerated(EnumType.STRING)
+	private Operacao operacao;
+	
+	private Double taxa;
+	
 	public String getContaOrigem() {
 		return contaOrigem;
 	}
@@ -52,11 +70,11 @@ public class Agendamento extends AbstractEntity<Long> {
 		this.contaDestino = contaDestino;
 	}
 
-	public BigDecimal getValorTransferencia() {
+	public Double getValorTransferencia() {
 		return valorTransferencia;
 	}
 
-	public void setValorTransferencia(BigDecimal valorTransferencia) {
+	public void setValorTransferencia(Double valorTransferencia) {
 		this.valorTransferencia = valorTransferencia;
 	}
 
@@ -74,6 +92,22 @@ public class Agendamento extends AbstractEntity<Long> {
 
 	public void setDataAgendamento(LocalDate dataAgendamento) {
 		this.dataAgendamento = dataAgendamento;
+	}
+
+	public Operacao getOperacao() {
+		return operacao;
+	}
+
+	public void setOperacao(Operacao operacao) {
+		this.operacao = operacao;
+	}
+
+	public Double getTaxa() {
+		return taxa;
+	}
+
+	public void setTaxa(Double taxa) {
+		this.taxa = taxa;
 	}
 	
 }

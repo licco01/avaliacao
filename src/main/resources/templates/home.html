@@ -1,31 +1,56 @@
-<html>
-	<head th:replace="~{base :: head}"></head>	
-	
-	<body>
-		<div th:replace="~{base :: logo}"></div>
-		<div class="container">
-			<div th:replace="~{base :: titulo('Meus agendamentos')}"></div>
-			<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
-				<div class="collapse navbar-collapse">
-					<a class="nav-item nav-link" href="">Todos</a>
-					<a class="nav-item nav-link" href="">Aguardando</a>
-					<a class="nav-item nav-link" href="">Aprovado</a>
-					<a class="nav-item nav-link" href="">Entregue</a>
-				</div>
-				<a href="/agendamento/formulario"><button class="btn btn-outline-success my-2 my-sm-0">Agendar</button></a>
-			</nav>
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml">
+
+	<head th:replace="~{head :: head}"></head>
 		
-			<div class="card mb-3 text-white bg-success mb-3" th:each="agendamento : ${agendamentos}">
-				<div class="card-header"></div>
-				<div class="card-body">	
-					<div  th:text="${agendamento.contaOrigem}">Conta de origem</div>
-					<div  th:text="${agendamento.contaDestino}">Conta de destino</div>
-					<div>Valor da transfer�ncia Taxa <span>200,99</span></div>
-					<div  th:text="${agendamento.dataTransferencia}">Data da transferência</div>
-					<div  th:text="${agendamento.dataAgendamento}">Data de agendamento</div>
-				</div>
-			</div>
+	<body>
+		<header th:replace="~{header :: header}"></header>
+		
+		<div class="layout-main">	
+		
+			<aside th:replace="~{aside :: aside}"></aside>
+			
+			<section class="layout-content">
+				<div class="container">
+					<div class="tab-content" id="nav-tabContent">
+							<a href="https://github.com/tm-vagas/avaliacao">Avaliação</a>
+							O usuário deve poder agendar uma transferência financeira com as seguintes informações:
+							<br>
+							<br>
+							Conta de origem (padrão XXXXXX) Conta de destino (padrão XXXXXX) 
+							<br>
+							Valor da transferência Taxa (a ser calculada) 
+							<br>
+							Data da transferência (data que será realizada a transferência) 
+							<br>
+							Data de agendamento (hoje)
+							<br>
+							Cada tipo de transação segue uma regra diferente para cálculo da taxa
+					</div>
+			</section>		
 		</div>
-	</body>
+		
+		<footer th:replace="~{footer :: footer}"></footer>
+		
+		<!-- Bootstrap core JavaScript
+	    ================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="/webjars/jquery/jquery.min.js"></script>
+		<script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+		<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+		    
+			$(function() {
+				$('[data-toggle="popover"]').popover();
+			});
+			
+			$(document).ready(function(){
+			    $(".navbar-toggle").click(function(){
+			        $(".sidebar").toggleClass("sidebar-open");
+			    })
+			});
 	
+		</script>
+	</body>
 </html>

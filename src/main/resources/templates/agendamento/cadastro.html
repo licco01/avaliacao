@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml">
-<head th:replace="~{base/head/head :: head}"></head>	
+<head th:replace="~{head :: head}"></head>	
 <body>
 	
-	<header th:replace="~{base/header/header :: header}"></header>
+	<header th:replace="~{header :: header}"></header>
 	
 	<div class="layout-main">
 	
-		<aside th:replace="~{base/aside/aside :: aside}"></aside>	
+		<aside th:replace="~{aside :: aside}"></aside>	
 
 	    <section class="layout-content">
 	        <div class="page-header">
@@ -54,56 +54,59 @@
 	        
 	            <form th:action="${agendamento.id == null} ? @{/agendamentos/salvar} : @{/agendamentos/editar}" th:object="${agendamento}" method="POST">
 	                <div class="form-row">
-	                    <div class="form-group col-md-4">
+	                    <div class="form-group col-md-2">
 	                        <label for=contaOrigem>Conta de origem</label>
-	                        <input type="text" class="form-control" id="contaOrigem" placeholder="34543"
-	                               autofocus="autofocus" th:field="*{contaOrigem}"/>
+	                        <input type="text" class="form-control" id="contaOrigem" placeholder="ex: 345439"
+	                               autofocus="autofocus" th:field="*{contaOrigem}" th:classappend="${#fields.hasErrors('contaOrigem')} ? 'is-invalid'"/>
 	                        <div class="invalid-feedback">
-	
+								<span th:errors="*{contaOrigem}"></span>
 	                        </div>
 	                    </div>
-	                   	<div class="form-group col-md-4">
+	                   	<div class="form-group col-md-2">
 	                        <label for="contaDestino">Conta de destino</label>
-	                        <input type="text" class="form-control" id="contaDestino" placeholder="12345"
-	                               autofocus="autofocus" th:field="*{contaDestino}"/>
+	                        <input type="text" class="form-control" id="contaDestino" placeholder="ex: 907265"
+	                               autofocus="autofocus" th:field="*{contaDestino}" th:classappend="${#fields.hasErrors('contaDestino')} ? 'is-invalid'"/>
 	                        <div class="invalid-feedback">
-	
+								<span th:errors="*{contaDestino}"></span>
 	                        </div>
 	                    </div>
-	                    <div class="form-group col-md-4">
+	                   	<div class="form-group col-md-2">
+	                        <label for="operacao">Tipo de operação</label>
+	                        <select id="operacao" class="form-control" th:field="*{operacao}"
+	                                th:classappend="${#fields.hasErrors('operacao')} ? 'is-invalid'">
+	                            <option value="">Selecione...</option>
+	                            <option th:each="operacao : ${op}" th:value="${operacao}" th:text="${operacao.sigla}"></option>
+	                        </select>
+	                        <div class="invalid-feedback">
+								<span th:errors="*{operacao}"></span>
+	                        </div>
+	                    </div>
+	                    <div class="form-group col-md-2">
 	                        <label for="valorTransferencia">Valor da transferência</label>
 	                        <input type="text" class="form-control" id="valorTransferencia" placeholder="$1.231,23" data-mask="#.##0,00"
-	                               data-mask-reverse="true" th:field="*{valorTransferencia}"/>
+	                               data-mask-reverse="true" th:field="*{valorTransferencia}" th:classappend="${#fields.hasErrors('valorTransferencia')} ? 'is-invalid'"/>
 	                        <div class="invalid-feedback">
-	
+								<span th:errors="*{valorTransferencia}"></span>
 	                        </div>
 	                    </div>
-	                </div>
-	                <div class="form-row">
-	                    <div class="form-group col-md-6">
-	                        <label for="dataAgendamento">Data de agendamento</label>
-	                        <input type="date" class="form-control" id="dataAgendamento" th:field="*{dataAgendamento}"/>
-	                        <div class="invalid-feedback">
-	
-	                        </div>
-	                    </div>
-	                    <div class="form-group col-md-6">
+	                	<div class="form-group col-md-2">
 	                        <label for="dataTransferencia">Data da transferência</label>
-	                        <input type="date" class="form-control" id="dataTransferencia" th:field="*{dataTransferencia}"/>
+	                        <input type="date" class="form-control" id="dataTransferencia" th:field="*{dataTransferencia}" th:classappend="${#fields.hasErrors('dataTransferencia')} ? 'is-invalid'"/>
 	                        <div class="invalid-feedback">
-	
+								<span th:errors="*{dataTransferencia}"></span>
 	                        </div>
 	                    </div>
 	                </div>
+
 	                <input type="hidden" id="id" name="id" value=""/>
-	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+	                <button type="submit" class="col-md-10 btn btn-primary btn-sm ">Salvar</button>
 	            </form>
 	        </div>
 	    </section>
 	
 	</div>
 	
- 	<footer th:replace="~{base/footer/footer :: footer}"></footer>
+ 	<footer th:replace="~{footer :: footer}"></footer>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

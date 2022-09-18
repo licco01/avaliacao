@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml">
-<head th:replace="~{base/head/head :: head}"></head>	
+<head th:replace="~{head :: head}"></head>	
 <body>
 	
-	<header th:replace="~{base/header/header :: header}"></header>
+	<header th:replace="~{header :: header}"></header>
 	
 	<div class="layout-main">
 	
-		<aside th:replace="~{base/aside/aside :: aside}"></aside>	
+		<aside th:replace="~{aside :: aside}"></aside>	
 	
 	    <section class="layout-content">
 	        <nav class="navbar navbar-expand-md bg-light">
@@ -81,24 +81,23 @@
 		                   		<th>Id</th>
 		                        <th>Conta de origem</th>
 		                        <th>Conta de destino</th>
-		                        <th>Valor da transferência com a taxa</th>
-		                        <th>Data de agendamento</th>
+		                        <th>Transferência</th>
+		                        <th>Operação</th>
 		                        <th>Data da transferência</th>
+		                        <th>Data de agendamento</th>
 		                        <th>Ação</th>
 		                    </tr>
 	                    </thead>
 	                    <tbody>
 		                    <tr th:each="agendamento : ${agendamentos}">
-		                        <td th:text="${agendamento.id}">2</td>
+		                        <td th:text="${agendamento.id}"></td>
 		                        <td th:text="${agendamento.contaOrigem}"></td>
 		                        <td th:text="${agendamento.contaDestino}"></td>
 		                        <td th:text="|R$ ${{agendamento.valorTransferencia}}|"></td>
+		                        <td th:text="${agendamento.operacao}"></td>
 		                        <td th:text="${#temporals.format(agendamento.dataTransferencia, 'dd/MM/yyyy')}"></td>
 		                        <td th:text="${#temporals.format(agendamento.dataAgendamento, 'dd/MM/yyyy')}"></td>
 		                        <td colspan="2">
-		                            <a class="btn btn-info btn-sm" th:href="@{/agendamentos/editar/{id} (id=${agendamento.id})}" role="button">
-		                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
-		                            </a>
 		                            <button th:id="${#strings.concat('btn_agendamentos/excluir/', agendamento.id) }" type="button" class="btn btn-danger btn-sm"
 		                                    data-toggle="modal" data-target="#myModal">
 		                                <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
@@ -109,16 +108,13 @@
 	                </table>
 	            </div>
 	        </div>
-			<div th:replace="~{base/modal/modal :: modal}"></div>
+			<div th:replace="~{modal :: modal}"></div>
 	    </section>
 
 	</div>
 	
-	<footer th:replace="~{base/footer/footer :: footer}"></footer>
+	<footer th:replace="~{footer :: footer}"></footer>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

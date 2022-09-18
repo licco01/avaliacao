@@ -2,10 +2,13 @@ Avaliação
 Desenvolver um sistema de agendamento de transferências financeiras.
 
 📋 Pré-requisitos
+```
 Linguagem: Java 8
+```
 IDE: (STS, Eclipse, IntelliJ)
+```
 Git
-
+```
 🔧 Instalação
 Clonar este repositório em sua maquina local
 Descompactar em alguma pasta
